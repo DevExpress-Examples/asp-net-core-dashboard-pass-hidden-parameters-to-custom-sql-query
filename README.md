@@ -1,25 +1,18 @@
-# Product/Platform - Task
+# Dashboard for ASP.NET Core - How to pass a hidden dashboard parameter to a custom SQL query
 
-This is the repository template for creating new examples. Describe the solved task here.
+This example shows how to pass a hidden [dashboard parameter](https://docs.devexpress.com/Dashboard/117062) to a [custom SQL query](https://docs.devexpress.com/Dashboard/117193).
 
-Put a screenshot that illustrates the result here.
-
-Then, add implementation details (steps, code snippets, and other technical information in a free form), or add a link to an existing document with implementation details. 
 
 ## Files to Review
 
-- link.cs (VB: link.vb)
-- link.js
-- ...
+
 
 ## Documentation
 
-- link
-- link
-- ...
+- [Dashboard Parameters](https://docs.devexpress.com/Dashboard/117062/web-dashboard/create-dashboards-on-the-web/data-analysis/dashboard-parameters)
+- [Query Parameters](https://docs.devexpress.com/Dashboard/117192/web-dashboard/create-dashboards-on-the-web/providing-data/working-with-sql-data-sources/pass-query-parameters)
+- [Custom SQL Queries](https://docs.devexpress.com/Dashboard/117193/web-dashboard/create-dashboards-on-the-web/providing-data/working-with-sql-data-sources/custom-sql-queries)
 
 ## More Examples
 
-- link
-- link
-- ...
+- [Dashboard for Web Forms - How to pass a hidden dashboard parameter to a custom SQL query](https://github.com/DevExpress-Examples/aspxdashboard-how-to-pass-a-hidden-dashboard-parameter-to-a-custom-sql-query-t491903)
