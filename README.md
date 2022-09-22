@@ -10,7 +10,7 @@ First, [create a dashboard parameter](https://docs.devexpress.com/Dashboard/1175
 
 ![Create a Dashboard Parameter](images/create-dashboard-parameter.png)
  
- To specify a custom SQL query in the SQL String editor, set the [DashboardConfigurator.AllowExecutingCustomSql](https://docs.devexpress.com/Dashboard/117193/web-dashboard/create-dashboards-on-the-web/providing-data/working-with-sql-data-sources/custom-sql-queries) property to `true`. You can see the query specified for the data source in the [Data Source Wizard](https://docs.devexpress.com/Dashboard/117680):
+To allow custom SQL queries execution on the server, set the [DashboardConfigurator.AllowExecutingCustomSql](https://docs.devexpress.com/Dashboard/117193/web-dashboard/create-dashboards-on-the-web/providing-data/working-with-sql-data-sources/custom-sql-queries) property to `true`. To allow end users to edit a custom SQL string in the SQL String editor, pass `true` to the [DataSourceWizardOptionBuilder.EnableCustomSql](https://docs.devexpress.com/Dashboard/DevExpress.DashboardAspNetCore.DataSourceWizardOptionBuilder.EnableCustomSql(System.Boolean)) method. You can see the query specified for the data source in the [Data Source Wizard](https://docs.devexpress.com/Dashboard/117680):
  
 ![Create a Dashboard Parameter](images/data-source-wizard-custom-query.png)
 
