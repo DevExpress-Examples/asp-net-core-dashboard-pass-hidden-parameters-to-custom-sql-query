@@ -19,13 +19,16 @@ namespace AspNetCoreDashboard_CustomParameters {
             DataSourceInMemoryStorage dataSourceStorage = new DataSourceInMemoryStorage();
             DashboardSqlDataSource sqlDataSource = new DashboardSqlDataSource("SQL Data Source", "sqlDataSource");
 
-
-            // Register the SQL data source.
             dataSourceStorage.RegisterDataSource("sqlDataSource", sqlDataSource.SaveToXml());
 
             configurator.AllowExecutingCustomSql = true;
 
-            configurator.CustomParameters += Configurator_CustomParameters;
+            configurator.CustomParameters += (s, e) => {
+                var custIDParameter = e.Parameters.FirstOrDefault(p => p.Name == "CustomerIdDashboardParameter");
+                if (custIDParameter != null) {
+                    custIDParameter.Value = "ALFKI";
+                }
+            };
 
             configurator.ConfigureDataConnection += (s, e) => {
                 CustomStringConnectionParameters sqlConnectionParameters =  new CustomStringConnectionParameters();
@@ -37,13 +40,6 @@ namespace AspNetCoreDashboard_CustomParameters {
             configurator.SetDataSourceStorage(dataSourceStorage);
 
             return configurator;
-        }
-
-        private static void Configurator_CustomParameters(object sender, CustomParametersWebEventArgs e) {
-            var custIDParameter = e.Parameters.FirstOrDefault(p => p.Name == "CustomerIdDashboardParameter");
-            if (custIDParameter != null) {
-                custIDParameter.Value = "ALFKI";
-            }
         }
     }
 }
