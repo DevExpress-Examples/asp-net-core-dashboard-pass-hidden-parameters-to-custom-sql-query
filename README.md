@@ -5,23 +5,45 @@
 <!-- default badges end -->
 # Dashboard for ASP.NET Core - How to pass a hidden dashboard parameter to a custom SQL query
 
-This example shows how to pass a hidden [dashboard parameter](https://docs.devexpress.com/Dashboard/117062) to a [custom SQL query](https://docs.devexpress.com/Dashboard/117193).
+This example shows how to pass a hidden [dashboard parameter](https://docs.devexpress.com/Dashboard/117062) to a [custom SQL query](https://docs.devexpress.com/Dashboard/117193). In this example, the [`DashboardConfigurator.CustomParameters`](https://docs.devexpress.com/Dashboard/DevExpress.DashboardWeb.DashboardConfigurator.CustomParameters) is handled to change the dashboard parameter's default value before it is passed to the query. 
 
-First, [create a dashboard parameter](https://docs.devexpress.com/Dashboard/117547). To do this, open the [dashboard menu](https://docs.devexpress.com/Dashboard/117444) and go to the **Parameters** section. In this section, add a new parameter and specify its settings. Disable the [**Visible**](https://docs.devexpress.com/Dashboard/js-DevExpress.Dashboard.Model.Parameter#js_devexpress_dashboard_model_parameter_parametervisible) checkbox to hide the parameter from users. In this example, the dashboard parameter's name is **CustomerIdDashboardParameter**:
+> **Warning**:
+> A user can get sensitive information from dashboard parameters. Encode the passed parameter value if possible. Do not store any sensitive information in dashboard parameters that isn't encrypted.
+
+## Example Overview
+
+To pass a hidden dashboard parameter to a custom SQL query, do the following.
+
+### Create a Dashboard Parameter
+
+To [create a dashboard parameter](https://docs.devexpress.com/Dashboard/117547), open the [dashboard menu](https://docs.devexpress.com/Dashboard/117444) and go to the **Parameters** section. In this section, create a parameter and specify its settings. Disable the [*Visible*](https://docs.devexpress.com/Dashboard/js-DevExpress.Dashboard.Model.Parameter#js_devexpress_dashboard_model_parameter_parametervisible) checkbox to hide the parameter from users in Viewer mode. In this example, the dashboard parameter's name is **CountryDashboardParameter** and its default value is _France_:
 
 ![Create a Dashboard Parameter](images/create-dashboard-parameter.png)
- 
-To allow custom SQL query execution on the server, set the [DashboardConfigurator.AllowExecutingCustomSql](https://docs.devexpress.com/Dashboard/117193/web-dashboard/create-dashboards-on-the-web/providing-data/working-with-sql-data-sources/custom-sql-queries) property to `true`. To allow users to edit a custom SQL string in the SQL String editor, pass `true` to the [DataSourceWizardOptionBuilder.EnableCustomSql](https://docs.devexpress.com/Dashboard/DevExpress.DashboardAspNetCore.DataSourceWizardOptionBuilder.EnableCustomSql(System.Boolean)) method. You can see the query specified for the data source in the [Data Source Wizard](https://docs.devexpress.com/Dashboard/117680):
+
+### Create a Custom Query
+
+Set the [`DashboardConfigurator.AllowExecutingCustomSql`](https://docs.devexpress.com/Dashboard/DevExpress.DashboardWeb.DashboardConfigurator.AllowExecutingCustomSql) property to `true` to allow custom SQL query execution on the server. To allow users to edit a custom SQL string in the SQL String editor, call the [`DataSourceWizardOptionBuilder.EnableCustomSql`](https://docs.devexpress.com/Dashboard/DevExpress.DashboardAspNetCore.DataSourceWizardOptionBuilder.EnableCustomSql(System.Boolean)) method and pass `true` as a parameter. 
+
+> **Warning**:
+> The use of custom SQL queries can lead to inadvertent or unauthorized modifications to your data/database structure. Ensure that you follow best practices and implement the appropriate user read/write privileges at database level.
+
+You can see the query specified for the data source in the [Data Source Wizard](https://docs.devexpress.com/Dashboard/117680):
  
 ![Create a Dashboard Parameter](images/data-source-wizard-custom-query.png)
 
-This query contains a query parameter named **CustomerIdParameter**. To be able to change the parameter's value, bind it to the **CustomerIdDashboardParameter** dashboard parameter. To do this, on the second page of the Data Source Wizard set the parameter's type to *Expression* and specify the corresponding dashboard parameter in the **Value** field :
+This query contains a query parameter named **CountryParameter**. 
+
+### Bind the Query Parameter to the Dashboard Parameter
+
+To be able to change the query parameter's value, bind it to the **CountryDashboardParameter** dashboard parameter. To do this, on the second page of the Data Source Wizard set the parameter's type to *Expression* and specify the corresponding dashboard parameter in the *Value* field.
 
 ![Create a Dashboard Parameter](images/query-parameter-settings.png)
 
-In this example, the [`DashboardConfigurator.CustomParameters`](https://docs.devexpress.com/Dashboard/DevExpress.DashboardWeb.DashboardConfigurator.CustomParameters) is handled to change the dashboard parameter's default value before it is passed to the query. 
+### Change the Default Parameter Value in Code
 
-As the result, users see a dashboard based on the data from the SQL query with the **CustomerIdParameter** parameter's value which was specified in the `DashboardConfigurator.CustomParameters` event.
+Handle the [`DashboardConfigurator.CustomParameters`](https://docs.devexpress.com/Dashboard/DevExpress.DashboardWeb.DashboardConfigurator.CustomParameters) event and specify the default value: [DashboardUtils.cs](./CS/AspNetCoreDashboard_CustomParameters/Code/DashboardUtils.cs).
+
+As the result, a user see a dashboard based on the data from the SQL query with the **CountryParameter** query parameter's value specified in the `DashboardConfigurator.CustomParameters` event handler (_Brazil_).
 
 ## Files to Review
 
