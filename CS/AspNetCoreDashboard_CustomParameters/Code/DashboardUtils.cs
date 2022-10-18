@@ -17,24 +17,17 @@ namespace AspNetCoreDashboard_CustomParameters {
             configurator.SetDashboardStorage(dashboardFileStorage);
 
             DataSourceInMemoryStorage dataSourceStorage = new DataSourceInMemoryStorage();
-            DashboardSqlDataSource sqlDataSource = new DashboardSqlDataSource("SQL Data Source", "sqlDataSource");
+            DashboardSqlDataSource sqlDataSource = new DashboardSqlDataSource("SQL Data Source", "NWindConnectionString");
 
             dataSourceStorage.RegisterDataSource("sqlDataSource", sqlDataSource.SaveToXml());
 
             configurator.AllowExecutingCustomSql = true;
 
             configurator.CustomParameters += (s, e) => {
-                var custIDParameter = e.Parameters.FirstOrDefault(p => p.Name == "CustomerIdDashboardParameter");
-                if (custIDParameter != null) {
-                    custIDParameter.Value = "ALFKI";
+                var countryParam = e.Parameters.FirstOrDefault(p => p.Name == "CountryDashboardParameter");
+                if (countryParam != null) {
+                    countryParam.Value = "Brazil";
                 }
-            };
-
-            configurator.ConfigureDataConnection += (s, e) => {
-                CustomStringConnectionParameters sqlConnectionParameters =  new CustomStringConnectionParameters();
-                string path = fileProvider.GetFileInfo("Data/NWind.mdf").PhysicalPath;
-                sqlConnectionParameters.ConnectionString = $"XpoProvider = MSSqlServer; Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = {path}; Integrated Security = True";
-                e.ConnectionParameters = sqlConnectionParameters;
             };
 
             configurator.SetDataSourceStorage(dataSourceStorage);
