@@ -43,7 +43,7 @@ To be able to change the query parameter's value, bind it to the **CountryDashbo
 
 Handle the [`DashboardConfigurator.CustomParameters`](https://docs.devexpress.com/Dashboard/DevExpress.DashboardWeb.DashboardConfigurator.CustomParameters) event and specify the default value: [DashboardUtils.cs](./CS/AspNetCoreDashboard_CustomParameters/Code/DashboardUtils.cs).
 
-As the result, a user see a dashboard based on the data from the SQL query with the **CountryParameter** query parameter's value specified in the `DashboardConfigurator.CustomParameters` event handler (_Brazil_).
+As the result, a user sees a dashboard based on the data from the SQL query with the **CountryParameter** query parameter's value specified in the `DashboardConfigurator.CustomParameters` event handler (_Brazil_).
 
 ## Files to Review
 
